@@ -1,1 +1,11 @@
-﻿<view>placeholder</view>
+<view class="login-page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:var(--primary);padding:40rpx">
+  <view class="login-card" style="background:#fff;border-radius:24rpx;padding:60rpx 40rpx;text-align:center;width:100%;max-width:600rpx">
+    <text style="font-size:80rpx;display:block;margin-bottom:24rpx">🏠</text>
+    <text style="font-size:36rpx;font-weight:700;color:var(--primary);display:block;margin-bottom:12rpx">AI获客机会雷达</text>
+    <text style="font-size:26rpx;color:var(--text-secondary);display:block;margin-bottom:40rpx">授权登录后，获取今日获客情报</text>
+    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" loading="{{loading}}" style="background:var(--primary);color:#fff;border-radius:12rpx;padding:24rpx;font-size:30rpx;border:none;width:100%">
+      微信一键授权登录
+    </button>
+    <text style="font-size:22rpx;color:var(--text-hint);display:block;margin-top:20rpx">拒绝授权仅可浏览部分内容</text>
+  </view>
+</view>

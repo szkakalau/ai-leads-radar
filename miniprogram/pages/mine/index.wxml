@@ -1,1 +1,32 @@
-﻿<view>placeholder</view>
+<scroll-view scroll-y class="page container">
+  <view class="user-card card" style="display:flex;align-items:center;gap:20rpx">
+    <image src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill" style="width:80rpx;height:80rpx;border-radius:50%;background:#eee"></image>
+    <view style="flex:1">
+      <text style="font-size:32rpx;font-weight:600;display:block">{{userInfo.nickName || '未登录'}}</text>
+      <text style="font-size:24rpx;color:{{isMember ? 'var(--success)' : 'var(--text-hint)'}}">{{memberExpireText}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{!isMember}}" style="margin-top:24rpx">
+    <text style="font-size:28rpx;font-weight:600;display:block;margin-bottom:16rpx">开通会员，解锁全部获客情报</text>
+    <view style="display:flex;gap:16rpx">
+      <view data-plan="personal" bindtap="onGoPayment" style="flex:1;background:#fff;border-radius:16rpx;padding:24rpx;text-align:center;border:2rpx solid var(--divider)">
+        <text style="font-size:30rpx;font-weight:600;display:block">个人版</text>
+        <text style="font-size:40rpx;font-weight:700;color:var(--primary);display:block;margin:12rpx 0">49元<text style="font-size:24rpx;font-weight:400">/月</text></text>
+        <text style="font-size:22rpx;color:var(--text-secondary);display:block;margin-bottom:16rpx">适合独立经纪人</text>
+        <view style="background:var(--primary);color:#fff;border-radius:8rpx;padding:12rpx;font-size:26rpx">开通</view>
+      </view>
+      <view data-plan="store" bindtap="onGoPayment" style="flex:1;background:#fff;border-radius:16rpx;padding:24rpx;text-align:center;border:2rpx solid var(--divider)">
+        <text style="font-size:30rpx;font-weight:600;display:block">单店版</text>
+        <text style="font-size:40rpx;font-weight:700;color:var(--primary);display:block;margin:12rpx 0">599元<text style="font-size:24rpx;font-weight:400">/月</text></text>
+        <text style="font-size:22rpx;color:var(--text-secondary);display:block;margin-bottom:16rpx">适合门店团队</text>
+        <view style="background:var(--primary);color:#fff;border-radius:8rpx;padding:12rpx;font-size:26rpx">开通</view>
+      </view>
+    </view>
+  </view>
+
+  <view style="margin-top:32rpx;background:#fff;border-radius:16rpx;overflow:hidden">
+    <view bindtap="onGoFaq" style="display:flex;justify-content:space-between;padding:28rpx 24rpx;font-size:28rpx;border-bottom:1rpx solid var(--divider)"><text>常见问题</text><text style="color:var(--text-hint)">›</text></view>
+    <view bindtap="onCopyWechat" style="display:flex;justify-content:space-between;padding:28rpx 24rpx;font-size:28rpx"><text>联系客服</text><text style="color:var(--text-hint)">›</text></view>
+  </view>
+</scroll-view>
