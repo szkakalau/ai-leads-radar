@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI获客机会雷达 · 管理后台</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif;background:#f5f5f5;color:#212121}
+.header{background:#1a237e;color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:20px}
+.nav{display:flex;gap:4px;background:#fff;padding:12px 24px;border-bottom:1px solid #eee}
+.nav-btn{padding:8px 16px;border:none;background:transparent;cursor:pointer;border-radius:8px;font-size:14px;transition:all .2s}
+.nav-btn.active{background:#1a237e;color:#fff}
+.content{padding:24px;max-width:1200px;margin:0 auto}
+.card{background:#fff;border-radius:12px;padding:20px;margin-bottom:16px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat-card{background:#fff;border-radius:12px;padding:20px;text-align:center}
+.stat-value{font-size:32px;font-weight:700;color:#1a237e}
+.stat-label{font-size:13px;color:#757575;margin-top:4px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px;text-align:left;border-bottom:1px solid #eee;font-size:13px}
+th{font-weight:600;color:#757575}
+.btn{padding:6px 16px;border:none;border-radius:6px;cursor:pointer;font-size:13px;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn-primary{background:#1a237e;color:#fff}
+.btn-success{background:#2e7d32;color:#fff}
+.btn-danger{background:#c62828;color:#fff}
+textarea,input[type=text],input[type=password]{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:14px;margin-bottom:12px}
+.hidden{display:none!important}
+.section{display:none}
+.section.active{display:block}
+.login-page{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#1a237e}
+.login-box{background:#fff;border-radius:16px;padding:40px;width:360px}
+.login-box h2{text-align:center;margin-bottom:24px;color:#1a237e}
+</style>
+</head>
+<body>
+
+<div id="loginPage" class="login-page">
+  <div class="login-box">
+    <h2>管理后台登录</h2>
+    <input type="text" id="username" placeholder="账号">
+    <input type="password" id="password" placeholder="密码">
+    <button class="btn btn-primary" style="width:100%;padding:12px" onclick="login()">登录</button>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <div class="header">
+    <h1>📡 AI获客机会雷达</h1>
+    <button class="btn" style="background:rgba(255,255,255,0.2);color:#fff" onclick="logout()">退出</button>
+  </div>
+  <div class="nav">
+    <button class="nav-btn active" onclick="switchTab('stats',this)">📊 数据概览</button>
+    <button class="nav-btn" onclick="switchTab('content',this)">📰 内容管理</button>
+    <button class="nav-btn" onclick="switchTab('users',this)">👥 用户管理</button>
+    <button class="nav-btn" onclick="switchTab('orders',this)">📋 订单审核</button>
+    <button class="nav-btn" onclick="switchTab('ai',this)">🤖 AI生成</button>
+  </div>
+  <div class="content">
+    <div id="statsSection" class="section active"><div class="stats-grid" id="statsGrid"></div></div>
+    <div id="contentSection" class="section"><button class="btn btn-primary" onclick="showReportForm()">+ 新建日报</button><div id="reportList" style="margin-top:16px"></div></div>
+    <div id="usersSection" class="section"><div id="userList"></div></div>
+    <div id="ordersSection" class="section"><div id="orderList"></div></div>
+    <div id="aiSection" class="section"><button class="btn btn-primary" onclick="triggerAiGenerate()">触发 AI 日报生成</button><div id="aiResult" style="margin-top:16px"></div></div>
+  </div>
+</div>
+
+<script>
+let token = '';
+const ENV_ID = 'YOUR_ENV_ID';
+
+async function callFunction(name, data = {}) {
+  const res = await fetch(`https://${ENV_ID}.service.tcloudbase.com/${name}`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data),
+  });
+  return res.json();
+}
+
+async function login() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  try {
+    const res = await callFunction('admin-auth', { username, password });
+    if (res.code === 0) {
+      token = res.data.token;
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('app').classList.remove('hidden');
+      loadStats();
+    } else { alert('登录失败：' + res.message); }
+  } catch (e) { alert('登录异常'); }
+}
+
+function logout() {
+  token = '';
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('loginPage').classList.remove('hidden');
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(name + 'Section').classList.add('active');
+  btn.classList.add('active');
+  if (name === 'stats') loadStats();
+  if (name === 'content') loadReports();
+  if (name === 'users') loadUsers();
+  if (name === 'orders') loadOrders();
+}
+
+async function loadStats() {
+  const res = await callFunction('admin-get-stats');
+  if (res.code === 0) {
+    const d = res.data;
+    document.getElementById('statsGrid').innerHTML = `
+      <div class="stat-card"><div class="stat-value">${d.totalUsers}</div><div class="stat-label">总用户数</div></div>
+      <div class="stat-card"><div class="stat-value">${d.todayNewUsers}</div><div class="stat-label">今日新增用户</div></div>
+      <div class="stat-card"><div class="stat-value">${d.paidUsers}</div><div class="stat-label">付费用户数</div></div>
+      <div class="stat-card"><div class="stat-value">${d.pendingOrders}</div><div class="stat-label">待审核订单</div></div>`;
+  }
+}
+
+async function loadReports() {
+  const res = await callFunction('admin-manage-report', { action: 'list' });
+  if (res.code === 0) {
+    document.getElementById('reportList').innerHTML = res.data.map(r =>
+      `<div class="card"><div style="display:flex;justify-content:space-between;align-items:center">
+        <div><b>${r.date}</b> <span style="color:${r.status===1?'#2e7d32':'#f57f17'}">${r.status===1?'已发布':'待审核'}</span></div>
+        <div>${r.status===0?`<button class="btn btn-success" onclick="publishReport('${r._id}')">发布</button>`:''}</div>
+      </div></div>`
+    ).join('');
+  }
+}
+
+async function publishReport(id) {
+  const res = await callFunction('admin-manage-report', { action: 'publish', reportId: id });
+  if (res.code === 0) { alert('发布成功'); loadReports(); }
+  else { alert('发布失败：' + res.message); }
+}
+
+async function loadUsers() {
+  const res = await callFunction('admin-manage-report', { action: 'list' });
+  document.getElementById('userList').innerHTML = '<p>用户列表功能（通过云开发控制台查看 user_info 表）</p>';
+}
+
+async function loadOrders() {
+  const res = await callFunction('admin-manage-report', { action: 'list' });
+  document.getElementById('orderList').innerHTML = '<p>订单审核功能（通过云开发控制台查看 payment_order 表 + 调用 admin-audit-order）</p>';
+}
+
+async function triggerAiGenerate() {
+  document.getElementById('aiResult').innerHTML = '<p>正在调用 DeepSeek AI 生成日报...</p>';
+  const res = await callFunction('generate-report', {});
+  if (res.code === 0) {
+    document.getElementById('aiResult').innerHTML = `<p style="color:green">✅ 日报初稿已生成 (ID: ${res.data.reportId})，请在「内容管理」中审核发布</p>`;
+  } else {
+    document.getElementById('aiResult').innerHTML = `<p style="color:red">生成失败：${res.message}</p>`;
+  }
+}
+
+function showReportForm() {
+  document.getElementById('reportList').innerHTML = '<p>使用 AI 生成功能创建日报，或通过云开发控制台手动添加。</p>' + document.getElementById('reportList').innerHTML;
+}
+</script>
+</body>
+</html>
