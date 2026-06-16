@@ -1,0 +1,21 @@
+# Superpowers
+.superpowers/
+
+# WeChat Mini Program
+miniprogram_npm/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
