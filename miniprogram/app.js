@@ -19,6 +19,14 @@ App({
     }
   },
 
+  onError(error) {
+    console.error('App Error:', error);
+  },
+
+  onPageNotFound(res) {
+    wx.redirectTo({ url: '/pages/today/index' });
+  },
+
   globalData: {
     userInfo: null,
     isLoggedIn: false,

@@ -52,3 +52,8 @@ page {
   background: transparent; border-radius: 12rpx; padding: 20rpx 40rpx;
   text-align: center; font-size: 30rpx; transition: all 0.2s ease-out;
 }
+
+/* Safe area bottom padding for tab bar pages */
+.tab-page {
+  padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
+}

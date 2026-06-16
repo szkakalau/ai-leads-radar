@@ -1,1 +1,12 @@
-﻿<view>placeholder</view>
+<scroll-view scroll-y class="page container">
+  <view class="page-header"><text class="header-title" style="font-size:34rpx;font-weight:700;color:var(--primary);display:block;padding:24rpx 0">常见问题</text></view>
+  <view class="faq-item card" wx:for="{{faqs}}" wx:key="q">
+    <view bindtap="toggleFaq" data-index="{{index}}" style="display:flex;justify-content:space-between;align-items:center">
+      <text style="font-size:28rpx;font-weight:500;flex:1">{{item.q}}</text>
+      <text style="font-size:24rpx;color:var(--text-hint)">{{item.open ? '▲' : '▼'}}</text>
+    </view>
+    <view wx:if="{{item.open}}" style="margin-top:16rpx;padding-top:16rpx;border-top:1rpx solid var(--divider)">
+      <text style="font-size:26rpx;color:var(--text-secondary);line-height:1.8">{{item.a}}</text>
+    </view>
+  </view>
+</scroll-view>
