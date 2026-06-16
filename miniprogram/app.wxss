@@ -1,0 +1,54 @@
+page {
+  --primary: #1a237e;
+  --s-level: #c62828;
+  --a-level: #e65100;
+  --risk: #757575;
+  --bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --text-hint: #bdbdbd;
+  --divider: #eeeeee;
+  --success: #2e7d32;
+  --warning: #f57f17;
+
+  background-color: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 28rpx;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.container { padding: 24rpx; }
+
+.card {
+  background: var(--card-bg);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-hint { color: var(--text-hint); }
+
+.tag-s { background: var(--s-level); color: #fff; padding: 4rpx 12rpx; border-radius: 6rpx; font-size: 22rpx; }
+.tag-a { background: var(--a-level); color: #fff; padding: 4rpx 12rpx; border-radius: 6rpx; font-size: 22rpx; }
+.tag-risk { background: var(--risk); color: #fff; padding: 4rpx 12rpx; border-radius: 6rpx; font-size: 22rpx; }
+
+.transition { transition: all 0.2s ease-out; }
+
+.divider { height: 1rpx; background: var(--divider); margin: 16rpx 0; }
+
+.btn-primary {
+  background: var(--primary); color: #fff; border-radius: 12rpx;
+  padding: 20rpx 40rpx; text-align: center; font-size: 30rpx;
+  font-weight: 500; transition: opacity 0.2s ease-out;
+}
+.btn-primary:active { opacity: 0.8; }
+
+.btn-outline {
+  border: 2rpx solid var(--primary); color: var(--primary);
+  background: transparent; border-radius: 12rpx; padding: 20rpx 40rpx;
+  text-align: center; font-size: 30rpx; transition: all 0.2s ease-out;
+}

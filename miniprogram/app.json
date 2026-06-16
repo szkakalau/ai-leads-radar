@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/today/index",
+    "pages/week/index",
+    "pages/history/index",
+    "pages/history/detail",
+    "pages/mine/index",
+    "pages/mine/payment/index",
+    "pages/mine/faq/index",
+    "pages/login/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#1a237e",
+    "navigationBarTitleText": "AI获客机会雷达",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "color": "#757575",
+    "selectedColor": "#1a237e",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/today/index", "text": "今日", "iconPath": "images/tab-today.png", "selectedIconPath": "images/tab-today-active.png" },
+      { "pagePath": "pages/week/index", "text": "本周", "iconPath": "images/tab-week.png", "selectedIconPath": "images/tab-week-active.png" },
+      { "pagePath": "pages/history/index", "text": "历史", "iconPath": "images/tab-history.png", "selectedIconPath": "images/tab-history-active.png" },
+      { "pagePath": "pages/mine/index", "text": "我的", "iconPath": "images/tab-mine.png", "selectedIconPath": "images/tab-mine-active.png" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
