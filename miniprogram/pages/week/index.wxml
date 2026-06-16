@@ -1,1 +1,33 @@
-﻿<view>placeholder</view>
+<scroll-view scroll-y class="page container">
+  <view class="page-header"><text class="header-title">本周核心获客战场</text></view>
+
+  <view wx:if="{{!isMember}}" class="paywall-full" style="text-align:center;padding:80rpx 40rpx">
+    <text style="font-size:64rpx;display:block;margin-bottom:20rpx">🔒</text>
+    <text style="font-size:30rpx;font-weight:600;display:block;margin-bottom:12rpx">会员专享内容</text>
+    <text style="font-size:26rpx;color:var(--text-secondary);display:block;margin-bottom:32rpx">开通会员查看本周战场分析与操作建议</text>
+    <view class="btn-primary" bindtap="onGoMember" style="display:inline-block">立即开通</view>
+  </view>
+
+  <block wx:elif="{{rank}}">
+    <view class="card" wx:for="{{rank.top_list}}" wx:key="rank">
+      <view style="display:flex;align-items:center;gap:12rpx;margin-bottom:8rpx">
+        <text style="font-size:24rpx;font-weight:700;color:var(--primary)">TOP{{item.rank}}</text>
+        <text class="tag-{{item.level === 'S' ? 's' : 'a'}}">{{item.level}}级</text>
+      </view>
+      <text style="font-size:30rpx;font-weight:600;display:block;margin-bottom:6rpx">{{item.title}}</text>
+      <text style="font-size:24rpx;color:var(--text-secondary)">{{'★'.repeat(item.stars)}}{{'☆'.repeat(5 - item.stars)}} {{item.stage}}</text>
+      <text style="font-size:24rpx;color:var(--text-primary);display:block;margin-top:8rpx">{{item.suggest}}</text>
+    </view>
+
+    <view class="card" wx:if="{{rank.risk_item}}">
+      <text class="tag-risk">⚠️ 风险赛道</text>
+      <text style="font-size:30rpx;font-weight:600;display:block;margin:8rpx 0">{{rank.risk_item.title}}</text>
+      <text style="font-size:24rpx">{{rank.risk_item.suggest}}</text>
+    </view>
+
+    <view class="card">
+      <text style="font-size:28rpx;font-weight:600;display:block;margin-bottom:12rpx">📝 本周需求说明</text>
+      <text style="font-size:26rpx;line-height:1.8">{{rank.week_summary}}</text>
+    </view>
+  </block>
+</scroll-view>

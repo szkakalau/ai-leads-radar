@@ -1,0 +1,13 @@
+.page { min-height: 100vh; padding: 0 24rpx; padding-bottom: 40rpx; }
+.page-header { display: flex; justify-content: space-between; align-items: center; padding: 24rpx 0; }
+.header-title { font-size: 34rpx; font-weight: 700; color: var(--primary); }
+.header-date { font-size: 24rpx; color: var(--text-secondary); }
+.core-summary { padding: 20rpx 24rpx; }
+.core-item { display: flex; align-items: flex-start; gap: 16rpx; padding: 16rpx 0; }
+.core-item + .core-item { border-top: 1rpx solid var(--divider); }
+.core-icon { font-size: 36rpx; }
+.core-text { flex: 1; }
+.core-label { font-size: 22rpx; color: var(--text-secondary); display: block; margin-bottom: 4rpx; }
+.core-value { font-size: 28rpx; font-weight: 500; color: var(--text-primary); }
+.compliance-notice { margin-top: 32rpx; padding: 20rpx; background: #fafafa; border-radius: 12rpx; font-size: 22rpx; color: var(--text-hint); text-align: center; line-height: 1.6; }
+.loading, .empty { text-align: center; padding: 100rpx 0; color: var(--text-hint); }

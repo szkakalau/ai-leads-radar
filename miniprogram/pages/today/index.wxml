@@ -1,1 +1,28 @@
-<view>placeholder</view>
+<scroll-view scroll-y class="page" refresher-enabled bindrefresherrefresh="onPullDownRefresh">
+  <view class="page-header">
+    <text class="header-title">AI获客机会雷达</text>
+    <text class="header-date">{{date}}</text>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <block wx:elif="{{report}}">
+    <view class="core-summary card">
+      <view class="core-item"><text class="core-icon">✅</text><view class="core-text"><text class="core-label">今日必做</text><text class="core-value">{{report.core_summary.must_do}}</text></view></view>
+      <view class="core-item"><text class="core-icon">❌</text><view class="core-text"><text class="core-label">绝对别碰</text><text class="core-value">{{report.core_summary.must_not}}</text></view></view>
+      <view class="core-item"><text class="core-icon">🔥</text><view class="core-text"><text class="core-label">最热片区</text><text class="core-value">{{report.core_summary.hot_area}}</text></view></view>
+    </view>
+
+    <opportunity-card level="S" data="{{report.s_opportunity}}" blurred="{{!isMember}}" />
+    <opportunity-card level="A" data="{{report.a_opportunity}}" blurred="{{!isMember}}" />
+    <risk-card data="{{report.risk_warning}}" blurred="{{!isMember}}" />
+    <area-ranking list="{{report.area_rank}}" blurred="{{!isMember}}" />
+    <peer-reference list="{{report.peer_reference}}" blurred="{{!isMember}}" />
+
+    <view class="compliance-notice">
+      <text>温馨提示：本产品仅提供获客方向参考，不承诺流量效果；房产内容请遵守平台规则，请勿承诺升值、学位等信息。</text>
+    </view>
+  </block>
+
+  <view wx:else class="empty">暂无日报内容</view>
+</scroll-view>

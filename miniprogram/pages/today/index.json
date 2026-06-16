@@ -1,1 +1,10 @@
-{}
+{
+  "navigationBarTitleText": "AI获客机会雷达",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "opportunity-card": "/components/opportunity-card/index",
+    "risk-card": "/components/risk-card/index",
+    "area-ranking": "/components/area-ranking/index",
+    "peer-reference": "/components/peer-reference/index"
+  }
+}

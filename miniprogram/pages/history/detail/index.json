@@ -1,1 +1,9 @@
-﻿{}
+{
+  "navigationBarTitleText": "日报详情",
+  "usingComponents": {
+    "opportunity-card": "/components/opportunity-card/index",
+    "risk-card": "/components/risk-card/index",
+    "area-ranking": "/components/area-ranking/index",
+    "peer-reference": "/components/peer-reference/index"
+  }
+}

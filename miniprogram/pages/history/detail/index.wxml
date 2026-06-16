@@ -1,1 +1,19 @@
-﻿<view>placeholder</view>
+<scroll-view scroll-y class="page">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <block wx:elif="{{report}}">
+    <view class="core-summary card">
+      <view class="core-item"><text class="core-icon">✅</text><view class="core-text"><text class="core-label">今日必做</text><text class="core-value">{{report.core_summary.must_do}}</text></view></view>
+      <view class="core-item"><text class="core-icon">❌</text><view class="core-text"><text class="core-label">绝对别碰</text><text class="core-value">{{report.core_summary.must_not}}</text></view></view>
+      <view class="core-item"><text class="core-icon">🔥</text><view class="core-text"><text class="core-label">最热片区</text><text class="core-value">{{report.core_summary.hot_area}}</text></view></view>
+    </view>
+
+    <opportunity-card level="S" data="{{report.s_opportunity}}" blurred="{{false}}" />
+    <opportunity-card level="A" data="{{report.a_opportunity}}" blurred="{{false}}" />
+    <risk-card data="{{report.risk_warning}}" blurred="{{false}}" />
+    <area-ranking list="{{report.area_rank}}" blurred="{{false}}" />
+    <peer-reference list="{{report.peer_reference}}" blurred="{{false}}" />
+  </block>
+
+  <view wx:else class="empty">暂无内容</view>
+</scroll-view>
