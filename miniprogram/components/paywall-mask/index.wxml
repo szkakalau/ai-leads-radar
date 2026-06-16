@@ -1,0 +1,9 @@
+<view class="paywall-mask" wx:if="{{visible}}">
+  <view class="mask-content">
+    <text class="lock-icon">🔒</text>
+    <text class="mask-title">开通会员，解锁全部获客情报</text>
+    <text class="mask-desc">每天 30 秒，知道今天发什么、别发什么</text>
+    <view class="mask-btn" bindtap="onGoMember"><text>立即开通</text></view>
+  </view>
+  <view class="mask-preview"><slot></slot></view>
+</view>

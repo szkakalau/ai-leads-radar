@@ -1,0 +1,13 @@
+.area-ranking { position: relative; overflow: hidden; }
+.section-title { font-size: 28rpx; font-weight: 600; margin-bottom: 16rpx; color: var(--text-primary); }
+.area-item { display: flex; align-items: center; justify-content: space-between; padding: 14rpx 0; }
+.area-item + .area-item { border-top: 1rpx solid var(--divider); }
+.area-name { font-size: 28rpx; font-weight: 500; min-width: 80rpx; }
+.area-fire { flex: 1; text-align: center; }
+.area-trend { font-size: 22rpx; }
+.trend-up { color: #c62828; }
+.trend-down { color: #2e7d32; }
+.trend-flat { color: var(--text-hint); }
+.blurred .area-list { filter: blur(4px); pointer-events: none; }
+.paywall-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(26, 35, 126, 0.9); color: #fff; padding: 20rpx 40rpx; border-radius: 12rpx; z-index: 10; }
+.paywall-text { font-size: 26rpx; font-weight: 500; }

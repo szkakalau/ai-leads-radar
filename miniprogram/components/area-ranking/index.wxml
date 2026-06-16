@@ -1,0 +1,13 @@
+<view class="area-ranking card {{blurred ? 'blurred' : ''}}">
+  <view class="section-title">📊 今日深圳各片区需求热度</view>
+  <view class="area-list" wx:if="{{!blurred}}">
+    <view class="area-item" wx:for="{{list}}" wx:key="name">
+      <text class="area-name">{{item.name}}</text>
+      <view class="area-fire"><text wx:for="{{item.fireLevel}}" wx:key="*this">🔥</text></view>
+      <text class="area-trend {{item.trend === 'up' ? 'trend-up' : item.trend === 'down' ? 'trend-down' : 'trend-flat'}}">
+        {{item.trend === 'up' ? '📈 上涨' : item.trend === 'down' ? '📉 回落' : '➡️ 持平'}}
+      </text>
+    </view>
+  </view>
+  <view class="paywall-overlay" wx:if="{{blurred}}"><text class="paywall-text">🔒 开通会员解锁片区热度榜</text></view>
+</view>

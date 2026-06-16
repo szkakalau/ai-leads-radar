@@ -1,0 +1,12 @@
+<view class="peer-reference card {{blurred ? 'blurred' : ''}}">
+  <view class="section-title">💡 今日可复用同行逻辑</view>
+  <view class="peer-list" wx:if="{{!blurred}}">
+    <view class="peer-item" wx:for="{{list}}" wx:key="nickname">
+      <text class="peer-nickname">{{item.nickname}}</text>
+      <text class="peer-topic">《{{item.topic}}》</text>
+      <view class="peer-logic"><text class="logic-label">核心逻辑：</text><text>{{item.logic}}</text></view>
+      <view class="peer-reuse"><text class="reuse-label">复用方法：</text><text>{{item.reuse}}</text></view>
+    </view>
+  </view>
+  <view class="paywall-overlay" wx:if="{{blurred}}"><text class="paywall-text">🔒 开通会员解锁同行参考</text></view>
+</view>

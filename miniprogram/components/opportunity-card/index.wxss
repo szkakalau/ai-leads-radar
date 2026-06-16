@@ -1,0 +1,23 @@
+.opportunity-card { position: relative; overflow: hidden; }
+.header { transition: all 0.2s ease-out; }
+.title-row { display: flex; align-items: flex-start; gap: 12rpx; margin-bottom: 12rpx; }
+.title { font-size: 30rpx; font-weight: 600; color: var(--text-primary); flex: 1; }
+.lifecycle { margin-bottom: 12rpx; }
+.lifecycle-label { font-size: 24rpx; color: var(--text-secondary); display: block; margin-bottom: 8rpx; }
+.progress-bar { height: 8rpx; background: #e0e0e0; border-radius: 4rpx; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--primary); border-radius: 4rpx; transition: width 0.3s ease-out; }
+.remain-info { background: #fff3e0; padding: 8rpx 16rpx; border-radius: 8rpx; margin-bottom: 12rpx; }
+.remain-text { font-size: 24rpx; color: var(--a-level); font-weight: 500; }
+.suggest { font-size: 26rpx; line-height: 1.6; color: var(--text-primary); margin-bottom: 12rpx; }
+.suggest-label { font-weight: 600; }
+.expand-btn { text-align: center; font-size: 24rpx; color: var(--text-hint); padding: 8rpx; }
+.detail { transition: all 0.2s ease-out; }
+.detail-item { display: flex; justify-content: space-between; padding: 8rpx 0; font-size: 24rpx; }
+.detail-label { color: var(--text-secondary); }
+.detail-value { font-weight: 500; color: var(--text-primary); }
+.blurred .header { filter: blur(4px); pointer-events: none; user-select: none; }
+.paywall-overlay {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: rgba(26, 35, 126, 0.9); color: #fff; padding: 20rpx 40rpx; border-radius: 12rpx; z-index: 10;
+}
+.paywall-text { font-size: 26rpx; font-weight: 500; }

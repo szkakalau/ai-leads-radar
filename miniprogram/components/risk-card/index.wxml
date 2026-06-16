@@ -1,0 +1,17 @@
+<view class="risk-card card {{blurred ? 'blurred' : ''}}">
+  <view class="header" bindtap="toggleExpand">
+    <view class="title-row">
+      <text class="tag-risk">⚠ 高风险</text>
+      <text class="title">{{blurred ? '开通会员查看完整内容' : data.title}}</text>
+    </view>
+    <view class="conclusion" wx:if="{{!blurred}}"><text>{{data.conclusion}}</text></view>
+    <view class="expand-btn" wx:if="{{!blurred}}"><text>{{expanded ? '收起风险详情 ▲' : '查看风险详情 ▼'}}</text></view>
+  </view>
+  <view class="detail" wx:if="{{expanded && !blurred}}">
+    <view class="divider"></view>
+    <view class="detail-item" wx:for="{{data.details}}" wx:key="label">
+      <text class="detail-label">{{item.label}}</text><text class="detail-value">{{item.value}}</text>
+    </view>
+  </view>
+  <view class="paywall-overlay" wx:if="{{blurred}}"><text class="paywall-text">🔒 开通会员解锁风险预警</text></view>
+</view>

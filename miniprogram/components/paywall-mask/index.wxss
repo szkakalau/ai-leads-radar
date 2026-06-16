@@ -1,0 +1,8 @@
+.paywall-mask { position: relative; }
+.mask-content { text-align: center; padding: 60rpx 40rpx; }
+.lock-icon { font-size: 64rpx; display: block; margin-bottom: 20rpx; }
+.mask-title { font-size: 32rpx; font-weight: 600; color: var(--text-primary); display: block; margin-bottom: 12rpx; }
+.mask-desc { font-size: 26rpx; color: var(--text-secondary); display: block; margin-bottom: 32rpx; }
+.mask-btn { background: var(--primary); color: #fff; border-radius: 12rpx; padding: 24rpx 60rpx; display: inline-block; font-size: 30rpx; font-weight: 500; transition: opacity 0.2s ease-out; }
+.mask-btn:active { opacity: 0.8; }
+.mask-preview { opacity: 0.3; pointer-events: none; }

@@ -1,0 +1,35 @@
+<view class="opportunity-card card {{blurred ? 'blurred' : ''}}">
+  <view class="header" bindtap="toggleExpand">
+    <view class="title-row">
+      <text class="tag {{level === 'S' ? 'tag-s' : 'tag-a'}}">{{level}}级机会</text>
+      <text class="title">{{blurred ? '开通会员查看完整内容' : data.title}}</text>
+    </view>
+    <block wx:if="{{!blurred}}">
+      <view class="lifecycle">
+        <text class="lifecycle-label">{{data.life_cycle || '未知'}} · 第{{data.life_cycle_day || '--'}}天</text>
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{(data.life_cycle_day || 0) * 20}}%"></view>
+        </view>
+      </view>
+      <view class="remain-info" wx:if="{{data.remain_days > 0}}">
+        <text class="remain-text">剩余{{data.remain_days}}天红利期</text>
+      </view>
+      <view class="suggest">
+        <text class="suggest-label">💡 核心建议：</text><text>{{data.suggest}}</text>
+      </view>
+    </block>
+    <view class="expand-btn" wx:if="{{!blurred}}">
+      <text>{{expanded ? '收起数据依据 ▲' : '查看数据依据 ▼'}}</text>
+    </view>
+  </view>
+  <view class="detail" wx:if="{{expanded && !blurred}}">
+    <view class="divider"></view>
+    <view class="detail-item"><text class="detail-label">需求增速：</text><text class="detail-value">{{data.demand_growth || '--'}}%</text></view>
+    <view class="detail-item"><text class="detail-label">供给增速：</text><text class="detail-value">{{data.supply_growth || '--'}}%</text></view>
+    <view class="detail-item"><text class="detail-label">供需比：</text><text class="detail-value">{{data.supply_demand_ratio || '--'}}</text></view>
+    <view class="detail-item"><text class="detail-label">高购买意图占比：</text><text class="detail-value">{{data.high_intent_ratio || '--'}}%</text></view>
+  </view>
+  <view class="paywall-overlay" wx:if="{{blurred}}" bindtap="onPaywallTap">
+    <text class="paywall-text">🔒 开通会员解锁完整机会分析</text>
+  </view>
+</view>
