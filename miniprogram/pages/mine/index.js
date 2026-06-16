@@ -27,7 +27,7 @@ Page({
 
   onCopyWechat() {
     wx.setClipboardData({
-      data: 'kefu_wechat_id_here',
+      data: 'Kwokchungsz',
       success: () => wx.showToast({ title: '已复制客服微信号' }),
     });
   },

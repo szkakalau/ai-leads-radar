@@ -5,7 +5,7 @@ App({
       return;
     }
     wx.cloud.init({
-      env: 'YOUR_ENV_ID',
+      env: 'cloud1-d7g17h93r50c9cd1f',
       traceUser: true,
     });
     this.checkLoginStatus();
