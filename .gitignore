@@ -19,3 +19,7 @@ node_modules/
 
 # Logs
 *.log
+.claude/
+.env
+.env.*
+.credentials.json
